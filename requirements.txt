@@ -1,0 +1,11 @@
+tensorflow==2.15.0
+matplotlib
+scipy
+torch==2.3.0
+torchvision
+nasbench-TF2 @ https://test.pypi.org/simple/
+jax[cuda12]
+ml_dtypes==0.4.0
+seaborn
+nats_bench
+gdown
