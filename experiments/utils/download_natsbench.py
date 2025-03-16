@@ -12,25 +12,11 @@ Usage:
 python ./experiments/utils/download_natsbench.py
  
 """
-# Copyright 2025 Anonymized Authors 
-#
-# Licensed under the Apache License, Version 2.0 (the "License"); 
-# you may not use this file except in compliance with the License. 
-# You may obtain a copy of the License at
-# https://www.apache.org/licenses/LICENSE-2.0
-
-"""
-This script downloads the NATS-Bench topology dataset
-
-Usage: 
-
-python ./experiments/utils/download_natsbench.py
-"""
 
 import os
 import sys
-import gdown  # Import gdown
-import tarfile  # Import tarfile for extraction
+import gdown 
+import tarfile
 
 # Updated FILE_ID based on the new link
 FILE_ID = "17_saCsj_krKjlCBLOJEpNtzPXArMCqxU"
