@@ -22,7 +22,6 @@ import random
 import numpy as np
 import os
 import tensorflow as tf
-import torch
 import time 
 from typing import Callable, Any, List
 import subprocess
@@ -384,56 +383,56 @@ class SpecOneHot(ModelSpec):
             spec = SpecOneHot(matrix=matrix, ops=cops)
         print(f"new class { time.time()-s}") # about 0.0004
         print(f"total { time.time()-sss}") # about 0.0004
-        
-def guided_mutation(nasb, device, population, mode = 0):
-    """Guided mutation using population distribution to sample from."""
 
-
+def guided_mutation(nasb, population):
     psize = len(population)
-    inputs = [x.flat for x in population]
-    mutation_inputs = torch.stack(inputs).to(device)
-    summed = torch.sum(mutation_inputs, dim=0)
-
-    # mutation inputs of shape (psize, embedded_dim)
-    # embedded dimension is flattened matrix of length spec.flat_matrix
-    # plus 3 times 5 operations in onehot encodings. 
     
-    probs_mat_1 = summed[:SpecMixed.flat_matrix]/psize # get population mass of ones for flat matrix
-    probs_mat_0 = 1 - probs_mat_1 # get population mass of zeros for flat matrix
+    inputs = [x.to_flat() for x in population]
+    mutation_inputs = np.array(inputs)
+    summed = np.sum(mutation_inputs, axis=0)
 
-    probs_ops_1 = summed[SpecMixed.flat_matrix:]/psize # get population mass of ones for operations
+    # Define the probabilities for mutation
+    probs_mat_1 = summed[:SpecOneHot.flat_matrix:2] / psize 
+    probs_mat_1 /= np.sum(probs_mat_1)  
+    probs_mat_0 = 1 - probs_mat_1  
+    probs_mat_0 /= np.sum(probs_mat_0)  
+
+    probs_ops_1 = summed[SpecOneHot.flat_matrix:] / psize
+    probs_ops_1 /= np.sum(probs_ops_1)  
     probs_ops_0 = 1 - probs_ops_1
-
-    if mode==1:
-        probs_ops = probs_ops_1
-    elif mode==0:
-        probs_ops = probs_ops_0
-    else:
-        print("mode can either be 0 or 1")
-
+    probs_ops_0 /= np.sum(probs_ops_0)  
 
     children = []
     for i in range(psize):
         while True:
-            child_spec = mutation_inputs[i,:].long().cpu().detach().numpy()
+            child_spec = mutation_inputs[i, :].astype(int)
 
-            mat_index_1 = torch.multinomial(probs_mat_0, 1, replacement=True)[0]
-            mat_index_0 = torch.multinomial(probs_mat_1, 1, replacement=True)[0]
-            ops_index = torch.multinomial(probs_ops, 1, replacement=True)[0]+SpecMixed.flat_matrix
+            # Select indices based on the probabilities using np.random.choice (similar to torch.multinomial)
+            mat_index_1 = np.random.choice(len(probs_mat_0), 1, p=probs_mat_0)[0]
+            mat_index_0 = np.random.choice(len(probs_mat_1), 1, p=probs_mat_1)[0]
 
-            base = (ops_index - (ops_index%3)).cpu().numpy()
-            remove = [base, base+1, base+2] 
+
+            ops_index = np.random.choice(len(probs_ops_1), 1, p=probs_ops_1)[0] + SpecOneHot.flat_matrix
+
+            # Modify the child_spec array based on the selected indices
+            base = (ops_index - (ops_index % 3))  # Ensure base is aligned to 3 operations
+            remove = [base, base + 1, base + 2]
             child_spec[remove] = 0
             child_spec[ops_index] = 1
 
+            # mutate adjacency matrix
+            child_spec[mat_index_1*2] = 1
+            child_spec[mat_index_1*2+1] = 0
 
-            child_spec[mat_index_1] = 1
-            child_spec[mat_index_0] = 0
+            child_spec[mat_index_0*2+1] = 1
+            child_spec[mat_index_0*2] = 0
 
-            spec = SpecMixed.spec_from_flat(child_spec)
+            spec = SpecOneHot.spec_from_flat(child_spec)
+            
             if nasb.is_valid(spec):
                 children.append(spec)
                 break
+
     return children
 
 def run_algorithm(algname, dataset, budget, loops): 
