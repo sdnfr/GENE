@@ -1,0 +1,3 @@
+[submodule "thirdparty/autodl"]
+	path = thirdparty/autodl
+	url = https://github.com/D-X-Y/AutoDL-Projects.git
