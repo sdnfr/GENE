@@ -14,18 +14,44 @@ pip install nats_bench
 pip install torchvision
 pip install gdown
 
+# Install ipykernel to make the virtual environment available as a Jupyter kernel
+pip install ipykernel
+python -m ipykernel install --user --name=.venv --display-name "Python (.venv)"
+
 
 # make user generated folders
 mkdir -p "output"
 mkdir -p "generated"
+mkdir -p "thirdparty"
 
 # download nasbench script
 python ./experiments/utils/download_nasbench.py
-# download natsbench script
-python ./experiments/utils/download_natsbench.py
 
 # init submodule
 git submodule update --init --recursive
 cd ./thirdparty/autodl
 pip install .
 cd ../..
+
+# Ask user if they want to set it permanently
+read -p " Do you want me to set TORCH_HOME permanently in your ~/.bashrc? (required for NATS-Bench) (y/n): " answer
+
+if [[ "$answer" =~ ^[Yy]$ ]]; then
+    # Check if it already exists in the file
+    if grep -q "TORCH_HOME" ~/.bashrc; then
+        echo " It looks like TORCH_HOME is already set in ~/.bashrc."
+        echo "You might want to review it manually."
+        echo "Please still download NATS-Bench via this command:"
+        echo "python ./experiments/utils/download_natsbench.py"
+    else
+        echo "Running: export TORCH_HOME=\"$(pwd)/generated\" >> ~/.bashrc"
+        echo "export TORCH_HOME=\"$(pwd)/generated\"" >> ~/.bashrc
+        source ~/.bashrc
+        source ./.venv/bin/activate
+        python ./experiments/utils/download_natsbench.py
+    fi
+else
+    echo "Please add TORCH_HOME permanently to your path"
+    echo "Additionally, download NATS-Bench via this command:"
+    echo "python ./experiments/utils/download_natsbench.py"
+fi

@@ -23,8 +23,6 @@ mkdir "generated"
 REM Download NAS-Bench script
 python ./experiments/utils/download_nasbench.py
 
-REM Download NATS-Bench script
-python ./experiments/utils/download_natsbench.py
 
 REM Initialize Git submodules
 git submodule update --init --recursive
@@ -33,3 +31,6 @@ REM Install third-party autodl
 cd thirdparty\autodl
 pip install .
 cd ..\..
+
+REM Download NATS-Bench script
+python ./experiments/utils/download_natsbench.py
