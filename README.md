@@ -13,8 +13,10 @@ Code implementation for "GENE: Guiding Exploration and Exploitation for Neural A
 ---
 
 ## Usage
-The experiments are designed in an incrementally walk-through manner. For a thorough comprehension, start in the labelled order and click yourself through the experiments. 
-This repository contains the experiments as described in section 4. Experiments of the paper "GENE: Guiding Exploration and Exploitation in Neural Architecture Search". The experiments correspond to the respective section, 1-> 4.1, 2->4.2, ... 
+The experiments are designed in an incrementally walk-through manner. For a thorough understanding, follow the labelled order and go through the experiments step by step.
+
+This repository contains the experiments as described in section 4 of the paper "GENE: Guiding Exploration and Exploitation in Neural Architecture Search". The experiments correspond to the respective sections:
+1 → 4.1, 2 → 4.2, 3 → 4.3, and so on. Start with an overview at experiments/datasets.ipynb. 
 
 ## Structure
 
@@ -31,7 +33,6 @@ The structure of this repository is organized as follows:
 |  └── 5_2_ablation_guided_mutation.ipynb
 |  └── 5_3_ablation_mixed_encoding.ipynb
 |  └── 5_4_ablation_operation_bias.ipynb
-|  └── 5_5_ablation_extending_time.ipynb
 |  └── utils
 |
 ├── generated
@@ -40,7 +41,6 @@ The structure of this repository is organized as follows:
 ├── thirdparty
 |
 ├── setup.sh
-├── setup_windows.bat
 |
 ├── requirements.txt
 ├── LICENSE
@@ -57,7 +57,6 @@ Here is a quick overview of the respective experiments:
 - 5_2_ablation_guided_mutation: this ablates the guided mutation in combination with different selection methods. 
 - 5_3_ablation_mixed_encoding: this ablates the different combinations of sampling from probs vector for NAS-Bench-101.
 - 5_4_ablation_operation_bias: this showcases the operation bias of NAS-Bench-101.
-- 5_5_ablation_extending_time: this extends time budgets for 3_benchmarking_GENE on NAS-Bench-101.
 - utils: This folder contains code that is reused in multiple notebooks. We introduce most functions in 1_datasets, which are then reused from the utils folder to reduce boilerplate code in the notebooks. 
 
 Other folders include custom generated files and models, as well as downloaded datasets:
