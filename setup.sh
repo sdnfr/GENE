@@ -28,7 +28,19 @@ mkdir -p "thirdparty"
 python ./experiments/utils/download_nasbench.py
 
 # init submodule
+# Check if the repository is inside a Git submodule (when not cloned but installed from zip)
+if [ ! -d ".git" ]; then
+    echo "Initializing Git repository..."
+    git init
+fi
+
 git submodule update --init --recursive
+
+if [ ! -d "./thirdparty/autodl/.git" ]; then
+    echo "Cloning missing AutoDL submodule..."
+    git clone https://github.com/D-X-Y/AutoDL-Projects.git thirdparty/autodl
+fi
+
 cd ./thirdparty/autodl
 pip install .
 cd ../..
