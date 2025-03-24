@@ -16,7 +16,7 @@ Code implementation for "GENE: Guiding Exploration and Exploitation for Neural A
 The experiments are designed in an incrementally walk-through manner. For a thorough understanding, follow the labelled order and go through the experiments step by step.
 
 This repository contains the experiments as described in section 4 of the paper "GENE: Guiding Exploration and Exploitation in Neural Architecture Search". The experiments correspond to the respective sections:
-1 → 4.1, 2 → 4.2, 3 → 4.3, and so on. Start with an overview at experiments/datasets.ipynb. 
+1 → 4.1, 2 → 4.2, 3 → 4.3, and so on. Start with an overview at experiments/1_datasets.ipynb. 
 
 ## Structure
 
