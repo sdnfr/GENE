@@ -64,7 +64,7 @@ Other folders include custom generated files and models, as well as downloaded d
 - output: The default location of NATS-run outputs.
 
 
-## Setup
+## Automatic Setup
 
 The provided plug-and-play installation script will automatically install all Python dependencies and both NAS-Bench-101 and NATS-Bench. You will only need this small setup:
 
@@ -84,8 +84,9 @@ In case there is a jax version mismatch, try
 pip install --upgrade jax jaxlib
 pip install jax==0.5.1 jaxlib==0.5.1
 
+## Manual Setup
 
-If the installation script does not work, try to manually install via requirements.txt
+If the installation script does not work or you prefer to manually install it yourself, try to manually install via requirements.txt. We recommend the automatic setup. 
 
 ```bash
 python -m venv ./.venv
@@ -94,7 +95,7 @@ pip install -r requirements.txt
 ```
 
 
-To generate your own data using NAS-Bench-101 and NATS-Bench, you need to download and install the required tabular benchmarks.
+To generate your own data using NAS-Bench-101 and NATS-Bench, you need to download and install the required tabular benchmarks. (The automatic setup will install this for you)
 
 ### NAS-Bench-101 Setup
 
