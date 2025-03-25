@@ -97,7 +97,7 @@ pip install -r requirements.txt
 
 To generate your own data using NAS-Bench-101 and NATS-Bench, you need to download and install the required tabular benchmarks. (The automatic setup will install this for you)
 
-### NAS-Bench-101 Setup
+#### NAS-Bench-101 Setup
 
 1. Download the `.tfrecord` file from Google Drive to the `./generated` folder. Follow the instructions [here](https://github.com/google-research/nasbench?tab=readme-ov-file#download-the-dataset) to download either the full version or the smaller version of the dataset.
 Alternatively, you can use the provided script to download: 
@@ -121,7 +121,7 @@ pip install -i https://test.pypi.org/simple/ nasbench-TF2
 
 Note: TensorFlow 2.15.0 is required to support NAS-Bench-101.
 
-### NATS-Bench Setup
+#### NATS-Bench Setup
 
 1. Install the `nats_bench` package for evaluation:
 
