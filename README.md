@@ -13,7 +13,7 @@ Code implementation for "GENE: Guiding Exploration and Exploitation for Neural A
 ---
 
 ## Usage
-The experiments are designed in an incrementally walk-through manner. For a thorough understanding, follow the labelled order and go through the experiments step by step.
+The experiments are designed in an incrementally walk-through manner. For a thorough understanding, follow the labelled order and go through the experiments step by step. Use the provided setup script for an easy installation of all benchmarks. 
 
 This repository contains the experiments as described in section 4 of the paper "GENE: Guiding Exploration and Exploitation in Neural Architecture Search". The experiments correspond to the respective sections:
 1 → 4.1, 2 → 4.2, 3 → 4.3, and so on. Start with an overview at experiments/1_datasets.ipynb. 
@@ -66,6 +66,14 @@ Other folders include custom generated files and models, as well as downloaded d
 
 ## Setup
 
+The provided plug-and-play installation script will automatically install all Python dependencies and both NAS-Bench-101 and NATS-Bench. You will only need this small setup:
+
+```bash
+git clone <repository_url> GENE
+cd GENE
+source setup.sh
+```
+
 Make sure to use python 3.11 for ideal performance. 
 We used tensorflow 2.15 with cuda11 and torch 2.3.
 There is a dependency conflict using jax and tensorflow together. 
@@ -77,15 +85,7 @@ pip install --upgrade jax jaxlib
 pip install jax==0.5.1 jaxlib==0.5.1
 
 
-
-The installation script should resolve all issues:
-```bash
-git clone <repository_url> GENE
-cd GENE
-source setup.sh
-```
-
-If this does not work, try to manually installing via requirements.txt
+If the installation script does not work, try to manually install via requirements.txt
 
 ```bash
 python -m venv ./.venv
