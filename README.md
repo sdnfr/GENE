@@ -7,7 +7,7 @@ Code implementation for "GENE: Guiding Exploration and Exploitation for Neural A
 
 - [Usage](#usage)
 - [Repository Structure](#structure)
-- [Setup](#setup)
+- [Automatic Setup](#setup)
 - [License](#license)
 - [Contact](#contact)
 ---
