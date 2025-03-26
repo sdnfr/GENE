@@ -68,21 +68,16 @@ Other folders include custom generated files and models, as well as downloaded d
 
 The provided plug-and-play installation script will automatically install all Python dependencies and both NAS-Bench-101 and NATS-Bench. You will only need this small setup:
 
+Make sure to have python 3.11 installed for ideal performance.
+
 ```bash
 git clone <repository_url> GENE
 cd GENE
 source setup.sh
 ```
 
-Make sure to use python 3.11 for ideal performance. 
-We used tensorflow 2.15 with cuda11 and torch 2.3.
-There is a dependency conflict using jax and tensorflow together. 
-jax requires ml_dtypes==0.4.0 and tensorflow requires ml_dtypes==0.2.0. 
-An installation of first tensorflow and then jax shows warnings but if errors
-persists, a separate environment for meta-evolution experiments needs to be deployed. 
-In case there is a jax version mismatch, try 
-pip install --upgrade jax jaxlib
-pip install jax==0.5.1 jaxlib==0.5.1
+If the repository can not be cloned, just unzip the archive instead of the first line.
+
 
 ## Manual Setup
 
@@ -93,6 +88,15 @@ python -m venv ./.venv
 source ./.venv/bin/activate
 pip install -r requirements.txt
 ```
+
+We used tensorflow 2.15 with cuda11 and torch 2.3.
+There is a dependency conflict using jax and tensorflow together. 
+jax requires ml_dtypes==0.4.0 and tensorflow requires ml_dtypes==0.2.0. 
+An installation of first tensorflow and then jax shows warnings but if errors
+persists
+In case there is a jax version mismatch, try 
+pip install --upgrade jax jaxlib
+pip install jax==0.5.1 jaxlib==0.5.1
 
 
 To generate your own data using NAS-Bench-101 and NATS-Bench, you need to download and install the required tabular benchmarks. (The automatic setup will install this for you)
